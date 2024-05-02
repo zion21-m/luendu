@@ -39,6 +39,7 @@ const RegistrationForm = ({ bricks }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [postNom, setPostNom] = useState("");
+  const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
@@ -71,6 +72,7 @@ const RegistrationForm = ({ bricks }) => {
         !lastName ||
         !email ||
         !password ||
+        !phone ||
         !username ||
         !birthDate ||
         !city ||
@@ -90,6 +92,7 @@ const RegistrationForm = ({ bricks }) => {
         familyName: postNom,
         birthDate,
         city,
+        phone,
         country,
         profile,
         role: "",
@@ -182,6 +185,19 @@ const RegistrationForm = ({ bricks }) => {
                 className="w-full border rounded px-3 py-2"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            {/* Phone */}
+            <div className="mb-4">
+              <label htmlFor="phone" className="block font-medium mb-1">
+                Téléphone
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                className="w-full border rounded px-3 py-2"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
               />
             </div>
             {/* Username */}

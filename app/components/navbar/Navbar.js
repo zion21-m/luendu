@@ -20,7 +20,7 @@ const Navbar = () => {
         <LogoLink />
         <div className="flex gap-3">
           <div className="hover:text-blue-400">
-            <Link href="/">Accueil</Link>
+            <Link href="https://luendu.org">Accueil</Link>
           </div>
           <div className="hover:text-blue-400">
             <Link href="/">Mon compte</Link>
