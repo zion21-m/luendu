@@ -3,9 +3,11 @@ import styles from "./index.module.css";
 import { cells } from "./data";
 import CellForm from "./CellForm";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 
 const WallForm = ({ bricks, userId }) => {
+  const router = useRouter();
   const [selectedId, setSelectedId] = useState(null);
   const [selected, setSelected] = useState(false);
   const [parts, setParts] = useState(1);
@@ -62,6 +64,9 @@ const WallForm = ({ bricks, userId }) => {
         console.log("Utilisateur créé avec succès :", response.data);
 
         setIsSuccess(true);
+        setTimeout(() => {
+          router.push("/informations-de-paiement");
+        }, 1000);
       } else {
         console.error("Échec de la création de l'utilisateur :", response.data);
         setIsError(true);
@@ -192,7 +197,10 @@ const WallForm = ({ bricks, userId }) => {
             <span className="italic text-gray-500">{message}</span> a été ajouté
             avec succès
           </p>
-          <p>Veuillez payer votre montant pour confirmer votre place</p>
+          <p className="italic">
+            Vous serez redirigé sur une page avec toutes les informations
+          </p>
+          <p className="mt-4 italic">Rédirection ...</p>
         </div>
       )}
     </div>
