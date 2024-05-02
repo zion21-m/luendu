@@ -19,7 +19,6 @@ const WallForm = ({ bricks, userId }) => {
 
   //   console.log("bricks wall")
 
-  console.log("user id wall form", userId);
   const handleClick = (cellId) => {
     setSelectedId(cellId);
     console.log("selected id", { selectedId, cellId });
@@ -54,7 +53,7 @@ const WallForm = ({ bricks, userId }) => {
           data: {
             width,
             heigth,
-            userId,
+            user: userId,
             orientation,
             message,
           },
@@ -73,6 +72,7 @@ const WallForm = ({ bricks, userId }) => {
       }
       console.log(response);
     } catch (error) {
+      console.log("error", error);
       console.error(
         "Erreur lors de la soumission du formulaire :",
         error.message
