@@ -106,7 +106,8 @@ const WallForm = ({ bricks, userId }) => {
           </div>
           <div>
             <h2 className="py-4 font-semibold">
-              Choisir une cellule pour votre zone
+              Choisir votre brique sur le mur de l&apos;Honneur et de la
+              Solidarité
             </h2>
           </div>
           <div className={styles.grid}>
