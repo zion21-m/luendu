@@ -43,8 +43,7 @@ const Page = () => {
           de votre paiement en envoyant quelqu&apos;un à votre emplacement.
           Cette option est pratique si vous souhaitez régler en espèces ou par
           chèque. Veuillez noter qu&apos;un frais de transport de 10 $ sera
-          ajouté pour couvrir les frais de déplacement. Votre sécurité est notre
-          priorité absolue.
+          ajouté pour couvrir les frais de déplacement.
         </p>{" "}
         <p>N.B :</p>
         <p>
