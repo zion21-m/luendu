@@ -10,7 +10,11 @@ const Page = async () => {
   return (
     <div>
       <div className="py-8 text-center">
-        <h1 className="text-xl font-semibold">Le mur de luendu</h1>
+        <h1 className="text-xl xl:text-5xl font-semibold">MUR LUENDU</h1>
+        <p className="text-base lg:text-lg">
+          de <span className="font-semibold italic">l&apos;Honneur </span> et de{" "}
+          <span className="font-semibold italic">la solidarité</span>
+        </p>
       </div>
       <Wall data={data} />
     </div>
