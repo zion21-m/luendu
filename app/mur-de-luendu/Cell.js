@@ -15,6 +15,8 @@ const Cell = ({ cell }) => {
     const data = await getBrickData({ brickId: cellId });
     setModalData({ show: true, loading: false, data });
   };
+  const backgroundColor = cell?.attributes?.message ? "#0080ff" : "#fffffe";
+  const textColor = cell?.attributes?.message ? "white" : " black";
 
   return (
     <>
@@ -23,6 +25,8 @@ const Cell = ({ cell }) => {
         style={{
           gridColumnEnd: `span ${cell?.attributes.width}`,
           gridRowEnd: `span ${cell?.attributes.heigth}`,
+          backgroundColor: backgroundColor,
+          color: textColor,
         }}
         onClick={() => handleClick(cell.id)}
       >
