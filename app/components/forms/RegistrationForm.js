@@ -3,6 +3,7 @@ import WallForm from "@/app/mur-de-luendu/WallForm";
 import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+import Sponsors from "./Sponsors";
 
 const RegistrationForm = ({ bricks }) => {
   // State pour stocker les valeurs des champs du formulaire
@@ -129,7 +130,7 @@ const RegistrationForm = ({ bricks }) => {
           Formulaire d&apos;enregistrement
         </h1>
       </div>
-      {!isNextStep ? (
+      {isNextStep ? (
         <form onSubmit={handleSubmit}>
           {/* Champs du formulaire */}
           {/* Prénom */}
@@ -343,7 +344,10 @@ const RegistrationForm = ({ bricks }) => {
             <p className="font-semibold text-lg">
               Voulez-vous être sponsors de Luendu ?
             </p>
-            <div className="flex gap-4">
+            <Sponsors />
+
+            {/* SLFMQFQ */}
+            <div className="flex gap-4 mt-4">
               <div>
                 <input
                   type="radio"
