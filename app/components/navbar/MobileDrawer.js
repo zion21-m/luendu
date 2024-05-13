@@ -15,7 +15,7 @@ const MobileDrawer = ({ isOpen, onClose }) => {
       </button>
       <ul className="flex flex-col justify-center items-center space-y-4">
         <li className="text-3xl hover:text-blue-900 hover:font-semibold">
-          <Link href="/">Home</Link>
+          <Link href="https://luendu.org">Accueil</Link>
         </li>
         {/* Add other navigation links */}
       </ul>

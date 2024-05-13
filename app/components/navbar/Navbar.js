@@ -21,9 +21,9 @@ const Navbar = () => {
           <div className="hover:text-blue-400">
             <Link href="https://luendu.org">Accueil</Link>
           </div>
-          <div className="hover:text-blue-400">
+          {/* <div className="hover:text-blue-400">
             <Link href="/mon-compte">Mon compte</Link>
-          </div>
+          </div> */}
         </div>
         {/* <DesktopNavLinks /> */}
       </div>
