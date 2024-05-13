@@ -130,7 +130,7 @@ const RegistrationForm = ({ bricks }) => {
           Formulaire d&apos;enregistrement
         </h1>
       </div>
-      {isNextStep ? (
+      {!isNextStep ? (
         <form onSubmit={handleSubmit}>
           {/* Champs du formulaire */}
           {/* Prénom */}
