@@ -1,9 +1,8 @@
 "use client";
 import { useState } from "react";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import LogoLink from "./LogoLink";
-import DesktopNavLinks from "./DesktopNavLinks";
+
 import MobileMenuButton from "./MobileMenuButton";
 import MobileDrawer from "./MobileDrawer";
 import Link from "next/link";
@@ -23,7 +22,7 @@ const Navbar = () => {
             <Link href="https://luendu.org">Accueil</Link>
           </div>
           <div className="hover:text-blue-400">
-            <Link href="#">Mon compte</Link>
+            <Link href="/mon-compte">Mon compte</Link>
           </div>
         </div>
         {/* <DesktopNavLinks /> */}
