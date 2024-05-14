@@ -1,12 +1,12 @@
 "use client";
 import { useState } from "react";
 
-const UserAccount = () => {
+const UserAccount = ({ userData }) => {
   // State pour stocker les informations de l'utilisateur
   const [user, setUser] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
+    firstName: userData?.nickname,
+    lastName: userData?.familyName,
+    email: userData?.email,
     password: "",
   });
 
@@ -66,9 +66,35 @@ const UserAccount = () => {
             className="border border-gray-300 px-4 py-2 w-full rounded"
           />
         </div>
+
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        >
+          Mettre à jour les informations
+        </button>
+      </form>
+      <form action="" className="mt-4">
+        <h2 className="text-xl font-semibold py-3">
+          Mis à jour du mot de passe
+        </h2>
+
         <div className="mb-4">
           <label htmlFor="password" className="block mb-2 font-medium">
-            Mot de passe
+            Ancien Mot de passe
+          </label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            value={user.password}
+            onChange={handleChange}
+            className="border border-gray-300 px-4 py-2 w-full rounded"
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="password" className="block mb-2 font-medium">
+            Nouveau Mot de passe
           </label>
           <input
             type="password"
@@ -83,7 +109,7 @@ const UserAccount = () => {
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
         >
-          Mettre à jour les informations
+          Mettre à jour le mot de passe
         </button>
       </form>
     </div>
