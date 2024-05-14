@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Page = () => {
@@ -66,6 +67,20 @@ const Page = () => {
         <p>
           Bien cordialement, <br /> L&apos;équipe LUENDU
         </p>
+        <div className="my-4">
+          <a
+            className="p-2 bg-slate-500 hover:bg-slate-700 text-white rounded-md m-2 "
+            href="http://localhost:3000/mur-de-luendu"
+          >
+            Visiter le mur
+          </a>
+          <a
+            href="http://localhost:3000/mon-compte"
+            className="p-2 bg-green-500 hover:bg-green-700 text-white rounded-md m-2 "
+          >
+            Aller sur mon compte
+          </a>
+        </div>
       </div>
     </div>
   );
