@@ -2,9 +2,6 @@ import { Inter } from "next/font/google";
 import Sidebar from "../components/sidebar/Sidebar";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
-// import Sidebar from "../components/Sidebar";
-// import { getServerSession } from "next-auth";
-// import { authOptions } from "../api/auth/[...nextauth]/route";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,12 +11,12 @@ export const metadata = {
 };
 
 export default async function Layout({ children }) {
-  //   const session = await getServerSession(authOptions);
   const session = await getServerSession(authOptions);
+  console.log("session layout", session);
 
   return (
     <>
-      {session && session?.user ? (
+      {session ? (
         <div className="flex h-screen flex-col md:flex-row md:overflow-hidden bg-white">
           <div className="w-full flex-none md:w-64">
             <Sidebar session={session} />
@@ -30,7 +27,7 @@ export default async function Layout({ children }) {
         </div>
       ) : (
         <div>
-          <p>Vous n&apos;êtes pas autorisé à accéder à cette ressource</p>
+          <p>Vous n&apos;êtes pas autorisé à accéder à cette page</p>
         </div>
       )}
     </>

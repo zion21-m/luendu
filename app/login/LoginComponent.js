@@ -33,12 +33,13 @@ const LoginComponent = () => {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailRegex.test(email)) {
       setIsErrorEmail(true);
-      setEmailValidation("Veuillez entrer un mail valide");
+      setEmailValidation("Veuillez entrer un email valide");
       return;
     }
     setLoading(true);
     let options = {
-      redirect: false,
+      redirect: true,
+      callbackUrl: "http://localhost:3000/mon-compte",
       email,
       password,
     };
@@ -52,13 +53,14 @@ const LoginComponent = () => {
       setErrorMessage(res.error);
       return;
     }
-    setStatus(res.status);
+    // setStatus(res.status);
     setLoading(false);
     setSuccess(true);
     setMessage("Connexion réussie, redirection...");
+
     setTimeout(() => {
       setSuccess(false);
-      router.push("/mon-compte");
+      //   router.push("/mon-compte");
     }, 2000);
   };
 
@@ -138,10 +140,10 @@ const LoginComponent = () => {
                     </p>
                   )}
                 </div>
-                {status === 200 && (
+                {success && (
                   <AddItemMessage message="Connexion avec succès, redirection..." />
                 )}
-                {status === 200 && success && (
+                {success && (
                   <p className="text-green-700 italic">
                     Connexion reussie, redirection...
                   </p>

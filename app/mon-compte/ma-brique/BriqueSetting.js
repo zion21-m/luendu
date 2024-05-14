@@ -1,19 +1,15 @@
 "use client";
 import { useState } from "react";
 
-const BriqueSetting = () => {
+const BriqueSetting = ({ data }) => {
+  console.log("data", data);
   // State pour stocker les informations de l'utilisateur
   const [showForm, setShowForm] = useState(false);
-  const [user, setUser] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-  });
+  const [message, setMessage] = useState(data?.message ? data.message : "");
 
   // Gestionnaire de changement pour les champs de saisie
   const handleChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value });
+    setMessage(e.target.value);
   };
 
   // Gestionnaire de soumission du formulaire
@@ -21,7 +17,7 @@ const BriqueSetting = () => {
     e.preventDefault();
     // Effectuer une action avec les informations utilisateur mises à jour, par exemple :
     // updateUser(user);
-    console.log("Informations utilisateur mises à jour :", user);
+    console.log("Informations utilisateur mises à jour :", message);
   };
 
   return (
@@ -39,7 +35,7 @@ const BriqueSetting = () => {
             onClick={() => setShowForm(!showForm)}
             className="p-2 bg-blue-500 hover:bg-blue-700 text-white rounded-md"
           >
-            Mettre à jour
+            Mettre à jour mon message
           </button>
         )}
       </div>
@@ -48,61 +44,23 @@ const BriqueSetting = () => {
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label htmlFor="firstName" className="block mb-2 font-medium">
-              Prénom
+              Message
             </label>
-            <input
+            <textarea
               type="text"
-              id="firstName"
-              name="firstName"
-              value={user.firstName}
+              id="message"
+              name="message"
+              value={message}
               onChange={handleChange}
               className="border border-gray-300 px-4 py-2 w-full rounded"
             />
           </div>
-          <div className="mb-4">
-            <label htmlFor="lastName" className="block mb-2 font-medium">
-              Nom de famille
-            </label>
-            <input
-              type="text"
-              id="lastName"
-              name="lastName"
-              value={user.lastName}
-              onChange={handleChange}
-              className="border border-gray-300 px-4 py-2 w-full rounded"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="email" className="block mb-2 font-medium">
-              Adresse e-mail
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={user.email}
-              onChange={handleChange}
-              className="border border-gray-300 px-4 py-2 w-full rounded"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="password" className="block mb-2 font-medium">
-              Mot de passe
-            </label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={user.password}
-              onChange={handleChange}
-              className="border border-gray-300 px-4 py-2 w-full rounded"
-            />
-          </div>
+
           <button
             type="submit"
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
           >
-            Mettre à jour les informations
+            Mettre à jour
           </button>
         </form>
       ) : (

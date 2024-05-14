@@ -5,13 +5,12 @@ import Link from "next/link";
 
 const Signout = () => {
   return (
-    <Link
-      href={"/login"}
-      onClick={() => signOut()}
-      className="p-2 py-3 bg-red-600 hover:bg-red-700 text-white rounded-md"
+    <button
+      onClick={() => signOut({ callbackUrl: "/login" })}
+      className="p-2 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md"
     >
       Se deconnecter
-    </Link>
+    </button>
   );
 };
 

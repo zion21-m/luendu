@@ -50,3 +50,20 @@ export async function getUserData({ userId }) {
     throw error; // or return null;
   }
 }
+export async function getUserBrickData({ userId }) {
+  try {
+    const response = await fetch(
+      `${baseUrl}/api/bricks?filters[user][$eq]=${userId}`,
+      {
+        next: { revalidate: 0 },
+      }
+    );
+    const data = await response.json();
+
+    return flattenAttributes(data);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error; // or return null;
+  }
+}
+// https://api.luendu.org/api/bricks?filters[user][$eq]=8

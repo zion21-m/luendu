@@ -24,8 +24,10 @@ const WallForm = ({ bricks, userId }) => {
     console.log("selected id", { selectedId, cellId });
     // setSelected(!selected);
   };
+  console.log("loading", isLoading);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     let width, heigth;
     if (orientation === "none") {
       width = parts;
@@ -175,7 +177,7 @@ const WallForm = ({ bricks, userId }) => {
                 )}
               </div>
               {isLoading ? (
-                <p className="italic">Création du compte en cours ...</p>
+                <p className="italic">Acquisition de la Brique en cours ...</p>
               ) : isError ? (
                 <p className="text-red-500">Une erreur est survenue</p>
               ) : (

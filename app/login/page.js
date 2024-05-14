@@ -21,9 +21,9 @@ const Page = async () => {
           <div>
             <Link
               className="p-2 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-md"
-              href="/dashboard"
+              href="/mon-compte"
             >
-              Aller sur le tableau de bord
+              Aller sur votre compte
             </Link>{" "}
             <Signout />
           </div>

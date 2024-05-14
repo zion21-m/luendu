@@ -23,23 +23,23 @@ const Navbar = () => {
       <div className="hidden relative py-6 sm:flex flex-row justify-between items-center border shadow-md px-4">
         {/* Logo and Desktop Navigation Links */}
         <LogoLink />
-        <div className="flex gap-3">
+        <div className="flex gap-3 items-center">
           <div className="hover:text-blue-400">
             <Link href="https://luendu.org">Accueil</Link>
           </div>
           {session ? (
-            <>
+            <div className="flex gap-3 items-center">
               <div className="hover:text-blue-400">
                 <Link href="/mon-compte">Mon compte</Link>
               </div>
-              <div>Bienvenue {session?.user?.name}</div>
+              <div>Bienvenue, {session?.user?.name}</div>
               <div>
                 <Signout />
               </div>
-            </>
+            </div>
           ) : (
             <div>
-              <button>Se connecter</button>
+              <Link href="/login">Se connecter</Link>
             </div>
           )}
         </div>
