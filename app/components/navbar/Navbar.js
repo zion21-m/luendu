@@ -27,6 +27,9 @@ const Navbar = () => {
           <div className="hover:text-blue-400">
             <Link href="https://luendu.org">Accueil</Link>
           </div>
+          <div className="hover:text-blue-400">
+            <Link href="/mur-de-luendu">Mur de Luendu</Link>
+          </div>
           {session ? (
             <div className="flex gap-3 items-center">
               <div className="hover:text-blue-400">
