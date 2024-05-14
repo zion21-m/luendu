@@ -1,5 +1,7 @@
 import { Inter } from "next/font/google";
 import Sidebar from "../components/sidebar/Sidebar";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 // import Sidebar from "../components/Sidebar";
 // import { getServerSession } from "next-auth";
 // import { authOptions } from "../api/auth/[...nextauth]/route";
@@ -13,12 +15,7 @@ export const metadata = {
 
 export default async function Layout({ children }) {
   //   const session = await getServerSession(authOptions);
-  const session = {
-    user: {
-      name: "Hello",
-      firstName: "Merdie",
-    },
-  };
+  const session = await getServerSession(authOptions);
 
   return (
     <>

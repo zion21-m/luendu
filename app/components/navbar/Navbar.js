@@ -6,8 +6,14 @@ import LogoLink from "./LogoLink";
 import MobileMenuButton from "./MobileMenuButton";
 import MobileDrawer from "./MobileDrawer";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+import Signout from "@/app/login/Signout";
 
 const Navbar = () => {
+  const { data: session, status: sessionStatus } = useSession();
+  console.log("session navbar", session);
+  console.log("session status", sessionStatus);
+
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const handleDrawerToggle = () => {
     setIsDrawerOpen(!isDrawerOpen);
@@ -21,9 +27,21 @@ const Navbar = () => {
           <div className="hover:text-blue-400">
             <Link href="https://luendu.org">Accueil</Link>
           </div>
-          {/* <div className="hover:text-blue-400">
-            <Link href="/mon-compte">Mon compte</Link>
-          </div> */}
+          {session ? (
+            <>
+              <div className="hover:text-blue-400">
+                <Link href="/mon-compte">Mon compte</Link>
+              </div>
+              <div>Bienvenue {session?.user?.name}</div>
+              <div>
+                <Signout />
+              </div>
+            </>
+          ) : (
+            <div>
+              <button>Se connecter</button>
+            </div>
+          )}
         </div>
         {/* <DesktopNavLinks /> */}
       </div>

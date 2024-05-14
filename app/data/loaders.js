@@ -42,8 +42,9 @@ export async function getUserData({ userId }) {
       next: { revalidate: 0 },
     });
     const data = await response.json();
+    console.log("data loader", data);
 
-    return data.data;
+    return data;
   } catch (error) {
     console.error("Error fetching data:", error);
     throw error; // or return null;
