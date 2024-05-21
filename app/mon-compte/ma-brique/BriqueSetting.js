@@ -7,6 +7,10 @@ const BriqueSetting = ({ data }) => {
   const [showForm, setShowForm] = useState(false);
   const [message, setMessage] = useState(data?.message ? data.message : "");
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
   // Gestionnaire de changement pour les champs de saisie
   const handleChange = (e) => {
     setMessage(e.target.value);
