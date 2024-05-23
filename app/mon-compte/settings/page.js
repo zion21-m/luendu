@@ -15,7 +15,7 @@ const Page = async () => {
       {!data ? (
         <div>Informations non disponibles</div>
       ) : (
-        <UserAccount userData={data} />
+        <UserAccount userData={data} userId={userId} />
       )}
     </div>
   );

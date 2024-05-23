@@ -39,7 +39,7 @@ export async function getUserData({ userId }) {
   const url = new URL(`/api/users`, baseUrl);
   try {
     const response = await fetch(`${baseUrl}/api/users/${userId}`, {
-      next: { revalidate: 0 },
+      next: { revalidate: 0, tags: ["users", userId] },
     });
     const data = await response.json();
     console.log("data loader", data);

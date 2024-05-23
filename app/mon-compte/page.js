@@ -22,6 +22,9 @@ const Page = async () => {
         </span>
       </h2>
       <p>Nom d&apos;utilisateur : {data?.username}</p>
+      <p>
+        Téléphone : {data?.phone ? data.phone : "Information non disponible"}
+      </p>
       <p>Compte créé le {formatDate(data?.createdAt)}</p>
       <p>Date de naissance : {formatDateOnly(data?.birthDate)}</p>
       <p>Ville de résidence : {data?.city}</p>
