@@ -6,6 +6,10 @@ import { getServerSession } from "next-auth";
 import Signout from "./Signout";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 
+export const metadata = {
+  title: "Connectez-vous sur Luendu",
+  description: "Page de connexion sur votre compte Luendu",
+};
 const Page = async () => {
   const session = await getServerSession(authOptions);
 

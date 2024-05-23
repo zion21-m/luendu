@@ -4,6 +4,11 @@ import Cell from "./Cell";
 import Wall from "./Wall";
 import { getBricksData } from "../data/loaders";
 
+export const metadata = {
+  title: "Mur Luendu",
+  description:
+    "Le Mur de Luendu représente tous ces HEROS qui ont cru au développement du Centre",
+};
 const Page = async () => {
   const data = await getBricksData();
 

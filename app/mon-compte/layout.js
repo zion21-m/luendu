@@ -6,8 +6,8 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Application de Gestion des Boîtes Postales",
-  description: "Une application de la SCPT pour la gestion des Boîtes Postales",
+  title: "Mon compte Luendu",
+  description: "Bienvenue sur votre compte Luendu",
 };
 
 export default async function Layout({ children }) {

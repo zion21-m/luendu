@@ -121,6 +121,17 @@ const LoginComponent = () => {
                 <div>
                   {isError && <p className="text-red-600">{errorMessage}</p>}
                 </div>
+                <div>
+                  <p>
+                    Vous n&apos;avez pas de compte ?{" "}
+                    <Link
+                      href={"/register"}
+                      className="hover:text-blue-500 hover:cursor-pointer"
+                    >
+                      Enregistrez-vous
+                    </Link>
+                  </p>
+                </div>
 
                 <div className="relative">
                   <button

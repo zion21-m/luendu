@@ -6,6 +6,10 @@ import { getBricksData, getUserBrickData } from "@/app/data/loaders";
 import Sponsors from "@/app/components/forms/Sponsors";
 import BecomeSponsor from "./BecomeSponsor";
 
+export const metadata = {
+  title: "Ma Brique Luendu",
+  description: "Mettez à jour les informations sur votre Brique",
+};
 const Page = async () => {
   const session = await getServerSession(authOptions);
   const userId = await session?.id;
