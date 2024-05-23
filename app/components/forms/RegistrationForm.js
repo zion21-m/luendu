@@ -324,7 +324,15 @@ const RegistrationForm = ({ bricks }) => {
             {isLoading ? (
               <p className="italic">Création du compte en cours ...</p>
             ) : isError ? (
-              <p className="text-red-500">Une erreur est survenue</p>
+              <div>
+                <p className="text-red-500">Une erreur est survenue</p>
+                <button
+                  type="submit"
+                  className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
+                >
+                  Réessayer
+                </button>
+              </div>
             ) : (
               <button
                 type="submit"
