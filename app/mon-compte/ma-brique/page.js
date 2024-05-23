@@ -12,7 +12,6 @@ const Page = async () => {
   const { data } = await getUserBrickData({ userId });
   const bricks = await getBricksData();
 
-  console.log("bricks", bricks);
   console.log("brick", data);
   return (
     <div>
@@ -39,7 +38,7 @@ const Page = async () => {
           })}
 
           {/*  */}
-          <BriqueSetting data={data[0]} />
+          <BriqueSetting data={data[0]} userId={userId} />
         </>
       ) : (
         <p>

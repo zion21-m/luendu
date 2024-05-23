@@ -1,7 +1,10 @@
 "use client";
 import { useState } from "react";
+import axios from "axios";
+import AddItemMessage from "@/app/components/AddItemMessage";
+import userBriqueAction from "./action";
 
-const BriqueSetting = ({ data }) => {
+const BriqueSetting = ({ data, userId }) => {
   console.log("data", data);
   // State pour stocker les informations de l'utilisateur
   const [showForm, setShowForm] = useState(false);
@@ -17,11 +20,45 @@ const BriqueSetting = ({ data }) => {
   };
 
   // Gestionnaire de soumission du formulaire
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Effectuer une action avec les informations utilisateur mises à jour, par exemple :
-    // updateUser(user);
-    console.log("Informations utilisateur mises à jour :", message);
+    setIsLoading(true);
+
+    try {
+      const response = await axios.put(
+        `https://api.luendu.org/api/bricks/${data.id}`,
+        {
+          data: {
+            message,
+          },
+        }
+      );
+      if (response.status === 200) {
+        console.log("Utilisateur créé avec succès :", response.data);
+
+        setIsSuccess(true);
+        setShowForm(false);
+
+        userBriqueAction();
+        setTimeout(() => {
+          setIsSuccess(false);
+        }, 2000);
+      } else {
+        console.error("Échec de la création de l'utilisateur :", response.data);
+        setIsError(true);
+      }
+      console.log(response);
+    } catch (error) {
+      console.log("error", error);
+      console.error(
+        "Erreur lors de la soumission du formulaire :",
+        error.message
+      );
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -60,15 +97,37 @@ const BriqueSetting = ({ data }) => {
             />
           </div>
 
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-          >
-            Mettre à jour
-          </button>
+          {isLoading ? (
+            <button
+              disabled
+              type="button"
+              className="bg-gray-400 cursor-not-allowed text-gray-700 italic px-4 py-2 rounded"
+            >
+              Mise à jour...
+            </button>
+          ) : isError ? (
+            <button
+              type="submit"
+              className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
+            >
+              Réessayer
+            </button>
+          ) : (
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            >
+              Mettre à jour
+            </button>
+          )}
         </form>
       ) : (
         <div></div>
+      )}
+      {isSuccess && (
+        <AddItemMessage
+          message={"Votre message a été mis à jour avec succès"}
+        />
       )}
     </div>
   );

@@ -55,7 +55,7 @@ export async function getUserBrickData({ userId }) {
     const response = await fetch(
       `${baseUrl}/api/bricks?filters[user][$eq]=${userId}`,
       {
-        next: { revalidate: 0 },
+        next: { revalidate: 0, tags: ["bricks", userId] },
       }
     );
     const data = await response.json();
