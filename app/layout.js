@@ -17,9 +17,7 @@ export const metadata = {
 
 export default async function RootLayout({ children }) {
   const session = await getServerSession(authOptions);
-  const userData = await getUserData({ userId: session.id });
-  console.log("sessions layout", session);
-  console.log("userData layout", userData);
+  const userData = await getUserData({ userId: session?.id });
 
   return (
     <html lang="fr">

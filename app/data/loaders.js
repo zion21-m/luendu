@@ -29,6 +29,7 @@ export async function getBrickData({ brickId }) {
 }
 
 export async function getUserData({ userId }) {
+  if (!userId) return null;
   try {
     const response = await fetch(`${API_URL}/users/${userId}`, {
       next: { revalidate: 0, tags: ["users", userId] },
