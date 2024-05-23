@@ -1,12 +1,9 @@
+import { API_URL } from "../lib/constants";
 import { flattenAttributes } from "../lib/utils";
 
-// const baseUrl = "http://localhost:1337";
-const baseUrl = "https://api.luendu.org";
-
 export async function getBricksData() {
-  const url = new URL("/api/bricks", baseUrl);
   try {
-    const response = await fetch(`${baseUrl}/api/bricks`, {
+    const response = await fetch(`${API_URL}/bricks`, {
       next: { revalidate: 0 },
     });
     const data = await response.json();
@@ -18,14 +15,10 @@ export async function getBricksData() {
   }
 }
 export async function getBrickData({ brickId }) {
-  const url = new URL("/api/bricks", baseUrl);
   try {
-    const response = await fetch(
-      `${baseUrl}/api/bricks/${brickId}?populate=user`,
-      {
-        next: { revalidate: 0 },
-      }
-    );
+    const response = await fetch(`${API_URL}/bricks/${brickId}?populate=user`, {
+      next: { revalidate: 0 },
+    });
     const data = await response.json();
 
     return flattenAttributes(data);
@@ -36,13 +29,11 @@ export async function getBrickData({ brickId }) {
 }
 
 export async function getUserData({ userId }) {
-  const url = new URL(`/api/users`, baseUrl);
   try {
-    const response = await fetch(`${baseUrl}/api/users/${userId}`, {
+    const response = await fetch(`${API_URL}/users/${userId}`, {
       next: { revalidate: 0, tags: ["users", userId] },
     });
     const data = await response.json();
-    console.log("data loader", data);
 
     return data;
   } catch (error) {
@@ -53,7 +44,7 @@ export async function getUserData({ userId }) {
 export async function getUserBrickData({ userId }) {
   try {
     const response = await fetch(
-      `${baseUrl}/api/bricks?filters[user][$eq]=${userId}`,
+      `${API_URL}/bricks?filters[user][$eq]=${userId}`,
       {
         next: { revalidate: 0, tags: ["bricks", userId] },
       }
@@ -66,4 +57,3 @@ export async function getUserBrickData({ userId }) {
     throw error; // or return null;
   }
 }
-// https://api.luendu.org/api/bricks?filters[user][$eq]=8

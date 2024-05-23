@@ -11,8 +11,6 @@ import Signout from "@/app/login/Signout";
 
 const Navbar = () => {
   const { data: session, status: sessionStatus } = useSession();
-  console.log("session navbar", session);
-  console.log("session status", sessionStatus);
 
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const handleDrawerToggle = () => {

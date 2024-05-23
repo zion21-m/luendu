@@ -5,10 +5,11 @@ import { useRouter } from "next/navigation";
 // import AddItemMessage from "../components/AddItemMessage";
 import AddItemMessage from "../components/AddItemMessage";
 import Link from "next/link";
+import { APP_URL } from "../lib/constants";
 
 const LoginComponent = () => {
   const { data: session, status: sessionStatus } = useSession();
-  console.log("session", session);
+
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [emailValidation, setEmailValidation] = useState(false);
@@ -39,13 +40,12 @@ const LoginComponent = () => {
     setLoading(true);
     let options = {
       redirect: true,
-      callbackUrl: "http://localhost:3000/mon-compte",
+      callbackUrl: `${APP_URL}/mon-compte`,
       email,
       password,
     };
 
     const res = await signIn("credentials", options);
-    console.log({ email, password, res });
 
     if (res?.error) {
       setIsError(true);

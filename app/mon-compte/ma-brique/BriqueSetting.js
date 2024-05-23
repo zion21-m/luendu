@@ -3,9 +3,9 @@ import { useState } from "react";
 import axios from "axios";
 import AddItemMessage from "@/app/components/AddItemMessage";
 import userBriqueAction from "./action";
+import { API_URL } from "@/app/lib/constants";
 
 const BriqueSetting = ({ data, userId }) => {
-  console.log("data", data);
   // State pour stocker les informations de l'utilisateur
   const [showForm, setShowForm] = useState(false);
   const [message, setMessage] = useState(data?.message ? data.message : "");
@@ -26,21 +26,16 @@ const BriqueSetting = ({ data, userId }) => {
     setIsLoading(true);
 
     try {
-      const response = await axios.put(
-        `https://api.luendu.org/api/bricks/${data.id}`,
-        {
-          data: {
-            message,
-          },
-        }
-      );
+      const response = await axios.put(`${API_URL}/bricks/${data.id}`, {
+        data: {
+          message,
+        },
+      });
       if (response.status === 200) {
-        console.log("Utilisateur créé avec succès :", response.data);
-
         setIsSuccess(true);
         setShowForm(false);
 
-        userBriqueAction();
+        userBriqueAction(userId);
         setTimeout(() => {
           setIsSuccess(false);
         }, 2000);
@@ -48,7 +43,6 @@ const BriqueSetting = ({ data, userId }) => {
         console.error("Échec de la création de l'utilisateur :", response.data);
         setIsError(true);
       }
-      console.log(response);
     } catch (error) {
       console.log("error", error);
       console.error(

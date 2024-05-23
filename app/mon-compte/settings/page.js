@@ -8,7 +8,7 @@ const Page = async () => {
   const session = await getServerSession(authOptions);
   const userId = await session?.id;
   const data = await getUserData({ userId });
-  console.log("data", data);
+
   return (
     <div>
       <h1 className="text-xl font-semibold">Réglages du compte</h1>

@@ -8,8 +8,7 @@ const Page = async () => {
   const session = await getServerSession(authOptions);
   const userId = await session?.id;
   const data = await getUserData({ userId });
-  console.log("session", session);
-  console.log("data", data);
+
   return (
     <div className="flex flex-col gap-2">
       <h1 className="text-xl font-semibold">Mon compte</h1>

@@ -3,10 +3,11 @@ import axios from "axios";
 import { useState } from "react";
 import userInformationsAction from "./action";
 import AddItemMessage from "@/app/components/AddItemMessage";
+import { API_URL } from "@/app/lib/constants";
 
 const UserAccount = ({ userData, userId }) => {
   // State pour stocker les informations de l'utilisateur
-  console.log("userData", userData);
+
   const [user, setUser] = useState({
     firstName: userData?.nickname,
     familyName: userData?.familyName,
@@ -38,7 +39,7 @@ const UserAccount = ({ userData, userId }) => {
 
     try {
       const response = await axios.put(
-        `https://api.luendu.org/api/users/${userId}`,
+        `${API_URL}/users/${userId}`,
 
         user
       );

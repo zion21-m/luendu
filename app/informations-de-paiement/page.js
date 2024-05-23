@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import { APP_URL } from "../lib/constants";
 
 const Page = () => {
   return (
@@ -70,12 +71,12 @@ const Page = () => {
         <div className="my-4">
           <a
             className="p-2 bg-slate-500 hover:bg-slate-700 text-white rounded-md m-2 "
-            href="http://localhost:3000/mur-de-luendu"
+            href={`${APP_URL}/mur-de-luendu`}
           >
             Visiter le mur
           </a>
           <a
-            href="http://localhost:3000/mon-compte"
+            href={`${APP_URL}/mon-compte`}
             className="p-2 bg-green-500 hover:bg-green-700 text-white rounded-md m-2 "
           >
             Aller sur mon compte

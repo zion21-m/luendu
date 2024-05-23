@@ -1,3 +1,4 @@
+import { API_URL } from "@/app/lib/constants";
 import axios from "axios";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -114,7 +115,7 @@ const signInAccount = async ({ password, email }) => {
     throw new Error("Veuillez entrer un mot de passe");
   }
 
-  const res = await axios.post("https://api.luendu.org/api/auth/local", {
+  const res = await axios.post(`${API_URL}/auth/local`, {
     identifier: email,
     password,
   });

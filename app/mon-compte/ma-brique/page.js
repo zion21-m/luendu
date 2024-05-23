@@ -12,7 +12,6 @@ const Page = async () => {
   const { data } = await getUserBrickData({ userId });
   const bricks = await getBricksData();
 
-  console.log("brick", data);
   return (
     <div>
       {data.length === 0 ? (

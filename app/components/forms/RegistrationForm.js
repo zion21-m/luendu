@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import Sponsors from "./Sponsors";
+import { API_URL } from "@/app/lib/constants";
 
 const RegistrationForm = ({ bricks }) => {
   // State pour stocker les valeurs des champs du formulaire
@@ -84,7 +85,7 @@ const RegistrationForm = ({ bricks }) => {
         throw new Error("Veuillez remplir tous les champs obligatoires.");
       }
 
-      const response = await axios.post("https://api.luendu.org/api/users", {
+      const response = await axios.post(`${API_URL}/api/users`, {
         nickname: firstName,
         name: lastName,
         email,
@@ -103,7 +104,7 @@ const RegistrationForm = ({ bricks }) => {
       // Gestion de la réponse de l'API
       if (response.status === 201) {
         console.log("Utilisateur créé avec succès :", response.data);
-        console.log("user iidd", response.data.id);
+
         setIsSuccess(true);
         setIsNextStep(true);
         setUserId(response.data.id);
@@ -121,7 +122,6 @@ const RegistrationForm = ({ bricks }) => {
       setIsLoading(false);
     }
   };
-  console.log("user idd", userId);
 
   return (
     <div className="container mx-auto py-4 pb-8">

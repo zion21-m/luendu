@@ -5,6 +5,7 @@ import CellForm from "./CellForm";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { API_URL } from "../lib/constants";
 
 const WallForm = ({ bricks, userId }) => {
   const router = useRouter();
@@ -17,14 +18,10 @@ const WallForm = ({ bricks, userId }) => {
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  //   console.log("bricks wall")
-
   const handleClick = (cellId) => {
     setSelectedId(cellId);
-    console.log("selected id", { selectedId, cellId });
-    // setSelected(!selected);
   };
-  console.log("loading", isLoading);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -39,42 +36,26 @@ const WallForm = ({ bricks, userId }) => {
       width = parts;
       heigth = 1;
     }
-    console.log({
-      width,
-      heigth,
-      id: selectedId,
-      orientation,
-      userId,
-      message,
-    });
 
     try {
-      const response = await axios.put(
-        `https://api.luendu.org/api/bricks/${selectedId}`,
-        {
-          data: {
-            width,
-            heigth,
-            user: userId,
-            orientation,
-            message,
-          },
-        }
-      );
+      const response = await axios.put(`${API_URL}/bricks/${selectedId}`, {
+        data: {
+          width,
+          heigth,
+          user: userId,
+          orientation,
+          message,
+        },
+      });
       if (response.status === 200) {
-        console.log("Utilisateur créé avec succès :", response.data);
-
         setIsSuccess(true);
         setTimeout(() => {
           router.push("/informations-de-paiement");
         }, 1000);
       } else {
-        console.error("Échec de la création de l'utilisateur :", response.data);
         setIsError(true);
       }
-      console.log(response);
     } catch (error) {
-      console.log("error", error);
       console.error(
         "Erreur lors de la soumission du formulaire :",
         error.message
