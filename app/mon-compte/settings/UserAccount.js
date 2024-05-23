@@ -9,7 +9,7 @@ const UserAccount = ({ userData, userId }) => {
   // State pour stocker les informations de l'utilisateur
 
   const [user, setUser] = useState({
-    firstName: userData?.nickname,
+    nickname: userData?.nickname,
     familyName: userData?.familyName,
     name: userData?.name,
     email: userData?.email,
@@ -38,11 +38,7 @@ const UserAccount = ({ userData, userId }) => {
     setIsLoading(true);
 
     try {
-      const response = await axios.put(
-        `${API_URL}/users/${userId}`,
-
-        user
-      );
+      const response = await axios.put(`${API_URL}/users/${userId}`, user);
       if (response.status === 200) {
         console.log("Utilisateur créé avec succès :", response.data);
 
@@ -74,14 +70,14 @@ const UserAccount = ({ userData, userId }) => {
       <h1 className="text-2xl font-bold mb-4">Compte utilisateur</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label htmlFor="firstName" className="block mb-2 font-medium">
+          <label htmlFor="nickname" className="block mb-2 font-medium">
             Prénom
           </label>
           <input
             type="text"
-            id="firstName"
-            name="firstName"
-            value={user.firstName}
+            id="nickname"
+            name="nickname"
+            value={user.nickname}
             onChange={handleChange}
             className="border border-gray-300 px-4 py-2 w-full rounded"
           />
