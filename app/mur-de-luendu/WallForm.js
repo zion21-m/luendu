@@ -6,9 +6,14 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { API_URL } from "../lib/constants";
+import { useSession } from "next-auth/react";
+import userBriqueAction from "../mon-compte/ma-brique/action";
+import AddItemMessage from "../components/AddItemMessage";
 
-const WallForm = ({ bricks, userId }) => {
+const WallForm = ({ bricks }) => {
   const router = useRouter();
+  const { data: session, status: sessionStatus } = useSession();
+  console.log(session);
   const [selectedId, setSelectedId] = useState(null);
   const [selected, setSelected] = useState(false);
   const [parts, setParts] = useState(1);
@@ -42,12 +47,13 @@ const WallForm = ({ bricks, userId }) => {
         data: {
           width,
           heigth,
-          user: userId,
+          user: session?.id,
           orientation,
           message,
         },
       });
       if (response.status === 200) {
+        userBriqueAction();
         setIsSuccess(true);
         setTimeout(() => {
           router.push("/informations-de-paiement");
@@ -185,6 +191,7 @@ const WallForm = ({ bricks, userId }) => {
             Vous serez redirigé sur une page avec toutes les informations
           </p>
           <p className="mt-4 italic">Rédirection ...</p>
+          <AddItemMessage message={"Redirection ..."} />
         </div>
       )}
     </div>

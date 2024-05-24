@@ -39,8 +39,7 @@ const LoginComponent = () => {
     }
     setLoading(true);
     let options = {
-      redirect: true,
-      callbackUrl: `${APP_URL}/mon-compte`,
+      redirect: false,
       email,
       password,
     };
@@ -57,6 +56,7 @@ const LoginComponent = () => {
     setLoading(false);
     setSuccess(true);
     setMessage("Connexion réussie, redirection...");
+    router.push("/mon-compte");
 
     setTimeout(() => {
       setSuccess(false);
@@ -94,7 +94,7 @@ const LoginComponent = () => {
                     htmlFor="email"
                     className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
                   >
-                    Adresse mail ou N° Téléphone
+                    Adresse mail
                   </label>
                 </div>
                 <div className="relative">

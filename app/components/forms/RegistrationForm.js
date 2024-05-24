@@ -5,6 +5,7 @@ import axios from "axios";
 import Link from "next/link";
 import Sponsors from "./Sponsors";
 import { API_URL } from "@/app/lib/constants";
+import { signIn } from "next-auth/react";
 
 const RegistrationForm = ({ bricks }) => {
   // State pour stocker les valeurs des champs du formulaire
@@ -58,7 +59,6 @@ const RegistrationForm = ({ bricks }) => {
   const [isError, setIsError] = useState(false);
 
   const [isNextStep, setIsNextStep] = useState(false);
-  const [userId, setUserId] = useState(null);
 
   // Fonction pour soumettre le formulaire
   const handleSubmit = async (e) => {
@@ -85,7 +85,7 @@ const RegistrationForm = ({ bricks }) => {
         throw new Error("Veuillez remplir tous les champs obligatoires.");
       }
 
-      const response = await axios.post(`${API_URL}/api/users`, {
+      const response = await axios.post(`${API_URL}/users`, {
         nickname: firstName,
         name: lastName,
         email,
@@ -104,10 +104,14 @@ const RegistrationForm = ({ bricks }) => {
       // Gestion de la réponse de l'API
       if (response.status === 201) {
         console.log("Utilisateur créé avec succès :", response.data);
+        await signIn("credentials", {
+          email,
+          password,
+          redirect: false,
+        });
 
         setIsSuccess(true);
         setIsNextStep(true);
-        setUserId(response.data.id);
       } else {
         console.error("Échec de la création de l'utilisateur :", response.data);
         setIsError(true);
@@ -384,7 +388,7 @@ const RegistrationForm = ({ bricks }) => {
           </div>
           {isSponsor === "yes" ? (
             <div className="py-4">
-              <WallForm bricks={bricks} userId={userId} />
+              <WallForm bricks={bricks} />
             </div>
           ) : isSponsor === "no" ? (
             <div className="w-full lg:w-1/2 mx-auto py-4">
