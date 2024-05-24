@@ -32,7 +32,7 @@ export async function getUserData({ userId }) {
   if (!userId) return null;
   try {
     const response = await fetch(`${API_URL}/users/${userId}`, {
-      next: { revalidate: 0, tags: ["users", userId] },
+      next: { revalidate: 0, tags: ["user"] },
     });
     const data = await response.json();
 
@@ -47,7 +47,7 @@ export async function getUserBrickData({ userId }) {
     const response = await fetch(
       `${API_URL}/bricks?filters[user][$eq]=${userId}`,
       {
-        next: { revalidate: 0, tags: ["bricks", userId] },
+        next: { revalidate: 0, tags: ["userbrick"] },
       }
     );
     const data = await response.json();

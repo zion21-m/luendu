@@ -35,7 +35,7 @@ const BriqueSetting = ({ data, userId }) => {
         setIsSuccess(true);
         setShowForm(false);
 
-        userBriqueAction(userId);
+        userBriqueAction();
         setTimeout(() => {
           setIsSuccess(false);
         }, 2000);

@@ -32,19 +32,15 @@ const UserAccount = ({ userData, userId }) => {
   // Gestionnaire de soumission du formulaire
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Effectuer une action avec les informations utilisateur mises à jour, par exemple :
-    // updateUser(user);
-    console.log("Informations utilisateur mises à jour :", user);
+
     setIsLoading(true);
 
     try {
       const response = await axios.put(`${API_URL}/users/${userId}`, user);
       if (response.status === 200) {
-        console.log("Utilisateur créé avec succès :", response.data);
-
         setIsSuccess(true);
 
-        userInformationsAction(userId);
+        userInformationsAction();
         setTimeout(() => {
           setIsSuccess(false);
         }, 2000);

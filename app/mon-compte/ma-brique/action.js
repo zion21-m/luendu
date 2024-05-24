@@ -2,6 +2,6 @@
 
 import { revalidateTag } from "next/cache";
 
-export default async function userBriqueAction(userId) {
-  revalidateTag(["briques", userId]);
+export default async function userBriqueAction() {
+  revalidateTag("userbrick");
 }
