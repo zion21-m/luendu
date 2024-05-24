@@ -183,7 +183,7 @@ const UserAccount = ({ userData, userId }) => {
           <AddItemMessage message={"Informations mises à jour avec succès"} />
         )}
       </form>
-      <form action="" className="mt-4">
+      {/* <form action="" className="mt-4">
         <h2 className="text-xl font-semibold py-3">
           Mis à jour du mot de passe
         </h2>
@@ -220,7 +220,7 @@ const UserAccount = ({ userData, userId }) => {
         >
           Mettre à jour le mot de passe
         </button>
-      </form>
+      </form> */}
     </div>
   );
 };
