@@ -52,6 +52,10 @@ const WallForm = ({ bricks }) => {
           message,
         },
       });
+      await axios.put(`${API_URL}/users/${session?.id}`, {
+        parts,
+        hasPaid: false,
+      });
       if (response.status === 200) {
         userBriqueAction();
         setIsSuccess(true);

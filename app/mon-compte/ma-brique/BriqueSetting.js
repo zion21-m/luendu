@@ -4,6 +4,7 @@ import axios from "axios";
 import AddItemMessage from "@/app/components/AddItemMessage";
 import userBriqueAction from "./action";
 import { API_URL } from "@/app/lib/constants";
+import userInformationsAction from "../settings/action";
 
 const BriqueSetting = ({ data, userId }) => {
   // State pour stocker les informations de l'utilisateur
@@ -31,11 +32,16 @@ const BriqueSetting = ({ data, userId }) => {
           message,
         },
       });
+      await axios.put(`${API_URL}/users/${userId}`, {
+        parts,
+        hasPaid: false,
+      });
       if (response.status === 200) {
         setIsSuccess(true);
         setShowForm(false);
 
         userBriqueAction();
+        userInformationsAction();
         setTimeout(() => {
           setIsSuccess(false);
         }, 2000);

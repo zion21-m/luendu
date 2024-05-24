@@ -1,15 +1,12 @@
 "use client";
 import { useState } from "react";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-// import AddItemMessage from "../components/AddItemMessage";
+
 import AddItemMessage from "../components/AddItemMessage";
 import Link from "next/link";
-import { APP_URL } from "../lib/constants";
 
 const LoginComponent = () => {
-  const { data: session, status: sessionStatus } = useSession();
-
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [emailValidation, setEmailValidation] = useState(false);
