@@ -50,6 +50,8 @@ const RegistrationForm = ({ bricks }) => {
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
   const [profile, setProfile] = useState();
+  const [otherProfile, setOtherProfile] = useState("");
+  const [isOtherSelected, setIsOtherSelected] = useState(false);
   const [selectedInterests, setSelectedInterests] = useState([]);
   const [isSponsor, setIsSponsor] = useState(false);
 
@@ -57,9 +59,48 @@ const RegistrationForm = ({ bricks }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
+  //
+
+  const [validationError, setValidationError] = useState(false);
+  const [validationErrorMessage, setValidationErrorMessage] = useState("");
 
   const [isNextStep, setIsNextStep] = useState(false);
 
+  //
+
+  const handleSelectChange = (event) => {
+    const selectedValue = event.target.value;
+    if (selectedValue === "Autre") {
+      setIsOtherSelected(true);
+      setProfile("");
+    } else {
+      setIsOtherSelected(false);
+      setProfile(selectedValue);
+    }
+  };
+  const handleOtherChange = (event) => {
+    const value = event.target.value;
+    setProfile(value); // Mettre à jour directement le profil avec la valeur saisie
+  };
+  // INTEREST ZONE
+  const handleCheckboxChange = (e) => {
+    setValidationError(false);
+    setValidationErrorMessage("");
+    const { value, checked } = e.target;
+    if (checked) {
+      if (selectedInterests.length < 2) {
+        setSelectedInterests([...selectedInterests, value]);
+      } else {
+        // Affichez une alerte ou un message si vous le souhaitez
+        alert("Vous ne pouvez sélectionner que 2 zones d'intérêts au maximum.");
+        e.target.checked = false;
+      }
+    } else {
+      setSelectedInterests(
+        selectedInterests.filter((interest) => interest !== value)
+      );
+    }
+  };
   // Fonction pour soumettre le formulaire
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -69,6 +110,13 @@ const RegistrationForm = ({ bricks }) => {
 
     try {
       // Validation des données côté client (à adapter selon vos besoins)
+      if (selectedInterests.length === 0) {
+        setValidationError(true);
+        setValidationErrorMessage(
+          "Vous devez sélectionner au moins une zone d'intérêt."
+        );
+        return;
+      }
       if (
         !firstName ||
         !lastName ||
@@ -82,7 +130,7 @@ const RegistrationForm = ({ bricks }) => {
         !profile ||
         !selectedInterests.length
       ) {
-        throw new Error("Veuillez remplir tous les champs obligatoires.");
+        alert("Veuillez remplir tous les champs obligatoires.");
       }
 
       const response = await axios.post(`${API_URL}/users`, {
@@ -177,6 +225,7 @@ const RegistrationForm = ({ bricks }) => {
                 className="w-full border rounded px-3 py-2"
                 value={postNom}
                 onChange={(e) => setPostNom(e.target.value)}
+                required
               />
             </div>
             {/* Email */}
@@ -185,11 +234,12 @@ const RegistrationForm = ({ bricks }) => {
                 Email
               </label>
               <input
-                type="text"
+                type="email"
                 id="email"
                 className="w-full border rounded px-3 py-2"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
               />
             </div>
             {/* Phone */}
@@ -203,6 +253,7 @@ const RegistrationForm = ({ bricks }) => {
                 className="w-full border rounded px-3 py-2"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
+                required
               />
             </div>
             {/* Username */}
@@ -229,6 +280,7 @@ const RegistrationForm = ({ bricks }) => {
                 className="w-full border rounded px-3 py-2"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                required
               />
             </div>
             {/* Date de naissance */}
@@ -284,7 +336,9 @@ const RegistrationForm = ({ bricks }) => {
                   className="w-full border rounded px-3 py-2"
                   name=""
                   id=""
-                  onChange={(e) => setProfile(e.target.value)}
+                  onChange={handleSelectChange}
+                  value={isOtherSelected ? "Autre" : profile}
+                  required
                 >
                   <option value="">-- Choisir un profil</option>
                   {profiles.map((profile, id) => (
@@ -294,6 +348,24 @@ const RegistrationForm = ({ bricks }) => {
                   ))}
                 </select>
               </div>
+              {isOtherSelected && (
+                <div className="mb-4 mt-4">
+                  <label
+                    htmlFor="otherProfile"
+                    className="block font-medium mb-1"
+                  >
+                    Préciser votre profile
+                  </label>
+                  <input
+                    type="text"
+                    id="otherProfile"
+                    className="w-full border rounded px-3 py-2"
+                    value={profile}
+                    onChange={handleOtherChange}
+                    required
+                  />
+                </div>
+              )}
               {/* Ajoutez d'autres cases à cocher pour les profils professionnels */}
             </div>
             {/* Zones d'intérêts */}
@@ -309,12 +381,8 @@ const RegistrationForm = ({ bricks }) => {
                       type="checkbox"
                       id={zone}
                       value={zone}
-                      onChange={(e) =>
-                        setSelectedInterests([
-                          ...selectedInterests,
-                          e.target.value,
-                        ])
-                      }
+                      onChange={handleCheckboxChange}
+                      checked={selectedInterests.includes(zone)}
                     />
                     <label htmlFor={zone} className="ml-1">
                       {zone}
@@ -322,6 +390,9 @@ const RegistrationForm = ({ bricks }) => {
                   </div>
                 ))}
               </div>
+              {validationError && (
+                <p className="mt-2 text-red-600">{validationErrorMessage}</p>
+              )}
 
               {/* Ajoutez d'autres cases à cocher pour les zones d'intérêts */}
             </div>
