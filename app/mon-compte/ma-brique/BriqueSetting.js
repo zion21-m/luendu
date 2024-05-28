@@ -26,6 +26,7 @@ const BriqueSetting = ({ data, userId }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setIsError(false);
 
     try {
       const response = await axios.put(`${API_URL}/bricks/${data.id}`, {
@@ -33,10 +34,10 @@ const BriqueSetting = ({ data, userId }) => {
           message,
         },
       });
-      await axios.put(`${API_URL}/users/${userId}`, {
-        parts,
-        hasPaid: false,
-      });
+      // await axios.put(`${API_URL}/users/${userId}`, {
+      //   parts,
+      //   hasPaid: false,
+      // });
       if (response.status === 200) {
         setIsSuccess(true);
         setShowForm(false);
@@ -89,6 +90,7 @@ const BriqueSetting = ({ data, userId }) => {
               Message
             </label>
             <textarea
+              required
               type="text"
               id="message"
               name="message"
@@ -116,7 +118,12 @@ const BriqueSetting = ({ data, userId }) => {
           ) : (
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              disabled={!message}
+              className={`bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 ${
+                message
+                  ? ""
+                  : "cursor-not-allowed bg-gray-400 hover:bg-gray-400"
+              }`}
             >
               Mettre à jour
             </button>
