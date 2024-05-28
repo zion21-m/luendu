@@ -24,7 +24,6 @@ const WallForm = ({ bricks }) => {
   const [isSuccess, setIsSuccess] = useState(false);
 
   const currentDate = new Date();
-  console.log(currentDate);
 
   const handleClick = (cellId) => {
     setSelectedId(cellId);
@@ -93,6 +92,7 @@ const WallForm = ({ bricks }) => {
                 type="number"
                 name="parts"
                 id="parts"
+                min={1}
                 onChange={(e) => setParts(e.target.value)}
               />
               <span className="ml-3 text-gray-500">{parts * 1000} $</span>
@@ -177,8 +177,11 @@ const WallForm = ({ bricks }) => {
                 <p className="text-red-500">Une erreur est survenue</p>
               ) : (
                 <button
+                  disabled={!message}
                   type="submit"
-                  className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                  className={`bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 ${
+                    message ? "" : "cursor-not-allowed"
+                  }`}
                 >
                   Soumettre
                 </button>
