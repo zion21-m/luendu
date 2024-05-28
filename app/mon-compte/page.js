@@ -3,6 +3,7 @@ import { authOptions } from "../api/auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
 import { getUserData } from "../data/loaders";
 import { formatDate, formatDateOnly } from "../data/date";
+import SubscriptionReminder from "./SubscriptionReminder";
 
 const Page = async () => {
   const session = await getServerSession(authOptions);
@@ -20,6 +21,10 @@ const Page = async () => {
             : `${data?.nickname} ${data?.name} ${data?.familyName}`}
         </span>
       </h2>
+      {data?.subscriptionDate ? (
+        <SubscriptionReminder subscriptionDate={data.subscriptionDate} />
+      ) : null}
+
       <p>Nom d&apos;utilisateur : {data?.username}</p>
       <p>
         Téléphone : {data?.phone ? data.phone : "Information non disponible"}

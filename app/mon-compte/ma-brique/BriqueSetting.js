@@ -8,6 +8,7 @@ import userInformationsAction from "../settings/action";
 
 const BriqueSetting = ({ data, userId }) => {
   // State pour stocker les informations de l'utilisateur
+
   const [showForm, setShowForm] = useState(false);
   const [message, setMessage] = useState(data?.message ? data.message : "");
 

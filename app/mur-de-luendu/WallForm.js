@@ -13,7 +13,7 @@ import AddItemMessage from "../components/AddItemMessage";
 const WallForm = ({ bricks }) => {
   const router = useRouter();
   const { data: session, status: sessionStatus } = useSession();
-  console.log(session);
+
   const [selectedId, setSelectedId] = useState(null);
   const [selected, setSelected] = useState(false);
   const [parts, setParts] = useState(1);
@@ -22,6 +22,9 @@ const WallForm = ({ bricks }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+
+  const currentDate = new Date();
+  console.log(currentDate);
 
   const handleClick = (cellId) => {
     setSelectedId(cellId);
@@ -55,6 +58,7 @@ const WallForm = ({ bricks }) => {
       await axios.put(`${API_URL}/users/${session?.id}`, {
         parts,
         hasPaid: false,
+        subscriptionDate: currentDate,
       });
       if (response.status === 200) {
         userBriqueAction();
