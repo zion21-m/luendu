@@ -59,6 +59,7 @@ const RegistrationForm = ({ bricks }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   //
 
   const [validationError, setValidationError] = useState(false);
@@ -131,6 +132,7 @@ const RegistrationForm = ({ bricks }) => {
         !selectedInterests.length
       ) {
         alert("Veuillez remplir tous les champs obligatoires.");
+        return;
       }
 
       const response = await axios.post(`${API_URL}/users`, {
@@ -151,7 +153,6 @@ const RegistrationForm = ({ bricks }) => {
 
       // Gestion de la réponse de l'API
       if (response.status === 201) {
-        console.log("Utilisateur créé avec succès :", response.data);
         await signIn("credentials", {
           email,
           password,
@@ -165,11 +166,9 @@ const RegistrationForm = ({ bricks }) => {
         setIsError(true);
       }
     } catch (error) {
-      console.error(
-        "Erreur lors de la soumission du formulaire :",
-        error.message
-      );
+      console.error("Erreur lors de la soumission du formulaire :", error);
       setIsError(true);
+      setErrorMessage(error);
     } finally {
       setIsLoading(false);
     }
@@ -262,6 +261,7 @@ const RegistrationForm = ({ bricks }) => {
                 Nom d&apos;utilisateur
               </label>
               <input
+                required
                 type="text"
                 id="username"
                 className="w-full border rounded px-3 py-2"
@@ -400,7 +400,19 @@ const RegistrationForm = ({ bricks }) => {
               <p className="italic">Création du compte en cours ...</p>
             ) : isError ? (
               <div>
-                <p className="text-red-500">Une erreur est survenue</p>
+                <div className=" pb-4">
+                  <span> Une erreur est survenue : </span>
+                  <p className="text-red-500">
+                    {errorMessage?.response?.data?.error?.message}
+                  </p>
+                  {errorMessage?.response?.data?.error?.details?.errors?.map(
+                    (error, id) => (
+                      <p className="text-red-500" key={id}>
+                        {error?.message}
+                      </p>
+                    )
+                  )}
+                </div>
                 <button
                   type="submit"
                   className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600"
